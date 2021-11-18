@@ -67,6 +67,20 @@ public class EmployeeController {
 
 		return "redirect:/employees/list";
 	}
+
+	@GetMapping("/search")
+	public String delete(@RequestParam("employeeName") String theName,
+						 Model theModel) {
+
+		// delete the employee
+		List<Employee> employees = employeeService.searchBy(theName);
+
+		// add to the spring model
+		theModel.addAttribute("employees", employees);
+
+		// send to /employees/list
+		return "/employees/list-employees";
+	}
 }
 
 
